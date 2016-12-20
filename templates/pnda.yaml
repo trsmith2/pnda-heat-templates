@@ -24,6 +24,10 @@ parameters:
     type: string
     description: >
       ID or name of public network for which floating IP addresses will be allocated
+  public_net2:
+  type: string
+    description: >
+      ID or name of public network which is used as an External Gateway for Second Router
   private_net_cidr:
     type: string
     description: Private network address (CIDR notation)
@@ -38,6 +42,18 @@ parameters:
     description: End of private network IP address allocation pool
   name_servers:
     description: List of name name servers
+    type: string
+  default_dest1:
+    description: Default Host route Destination for Internet
+    type: string
+  default_nexthop1:
+    description: Default Host route Nexthop for Internet
+    type: string
+  default_dest2:
+    description:  Default Host route Destination for Controller Host
+    type: string
+  default_nexthop2:
+    description: Default Host route Nexthop for Controller Host
     type: string
   KeyName:
     description: Name of an existing KeyPair to enable SSH access to the instances
@@ -175,7 +191,7 @@ resources:
        host_routes:
         - destination: { get_param: default_dest1 }
           nexthop: { get_param: default_nexthop1 }
-          destination: { get_param: default_dest2 }
+        - destination: { get_param: default_dest2 }
           nexthop: { get_param: default_nexthop2 }
       dns_nameservers: { get_param: name_servers }
   
