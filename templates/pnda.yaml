@@ -172,7 +172,13 @@ resources:
       allocation_pools:
         - start: { get_param: private_net_pool_start }
           end: { get_param: private_net_pool_end }
+       host_routes:
+        - destination: { get_param: default_dest1 }
+          nexthop: { get_param: default_nexthop1 }
+          destination: { get_param: default_dest2 }
+          nexthop: { get_param: default_nexthop2 }
       dns_nameservers: { get_param: name_servers }
+  
   router:
     type: OS::Neutron::Router
     properties:
@@ -183,6 +189,20 @@ resources:
     properties:
       router_id: { get_resource: router }
       subnet_id: { get_resource: private_subnet }
+    
+    router:
+     type: OS::Neutron::Router
+     properties:
+       external_gateway_info:
+         network: { get_param: public_net2 }
+    router_interface:
+      type: OS::Neutron::RouterInterface
+      properties:
+        router_id: { get_resource: router }
+        subnet_id: { get_resource: private_subnet }
+        port: { get_param:  default_nexthop2 }
+ 
+      
   PndaSecGroup:
     type: OS::Neutron::SecurityGroup
     properties:
