@@ -176,3 +176,27 @@ parameter_defaults:
   # AWS_REGION: AWS region to use to access the s3 bucket that contains application packages
   # 
   #AWS_REGION=xxxx
+  
+  ######################## New Parameter Changes##################
+  
+  # public_net2: UUID of the public network for Second Router
+  #
+  public_net2: 5982b761-802a-4af3-9c0b-c3b4575591
+  
+  # default_dest1: The default Host Route Destination for Internet
+  #
+  default_dest1: '0.0.0.0/24'
+
+  #
+  # default_nexthop1: The default Host Route Nexthop for Internet
+  #
+  default_nexthop1: '192.168.10.1'
+  
+  # default_dest2: The default Host Route Destination for Controller Host
+  #
+  default_dest2: '153.168.10.10/24'
+
+  #
+  # default_nexthop2: The default Host Route NextHop for Controller Host ( Gateway for Private Subnet +1)
+  #
+  default_nexthop2: '192.168.10.2'
