@@ -212,15 +212,15 @@ resources:
       router_id: { get_resource: router }
       subnet_id: { get_resource: private_subnet }
     
-   router:
+  router2:
      type: OS::Neutron::Router
      properties:
        external_gateway_info:
          network: { get_param: public_net2 }
-    router_interface:
+  router_interface:
       type: OS::Neutron::RouterInterface
       properties:
-        router_id: { get_resource: router }
+        router_id: { get_resource: router2 }
         port: { get_resource: private_port }
         
   PndaSecGroup:
